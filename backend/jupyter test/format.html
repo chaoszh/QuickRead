@@ -1,0 +1,106 @@
+'"
+<h2><strong>简介</strong></h2>
+<p><strong></strong>上一篇生成测试报告，小伙伴们和童鞋们就又问道，测试报告已经生成了，怎么发送给相关的负责人了？小伙伴们和童鞋们不要着急，听宏哥慢慢给你道来，心急吃不了热豆腐哈。这些小伙伴们的表现还是不错的，还有表现差一点的小伙伴或者童鞋们，窃窃自喜，以为万事大吉了，NO，还差一步，不把测试报告发出去好好地在领导面前表现一番，你留着生娃过年吗？辛苦了这么久升职加薪就靠这一把了今天这篇文章宏哥就给小伙伴和童鞋们来答疑解惑了，当然了方式方法多种多样的，你可以通过邮件、QQ、微信将测试报告附件手动写邮件发送给相关负责人。这里宏哥讲解如何将测试报告自动发送给相关的负责人。</p>
+<h2>安装插件</h2>
+<p>1、安装插件：<strong>Email Extension Plugin</strong></p>
+<p>从上一篇文章想必大家都知道了如何安装插件的两种方法了吧。在这里宏哥还是选择第二种方法，建议小伙伴和童鞋们也选择这种方法。这样就不需要找那个插件文件的下载地址，版本与jenkins的兼容等等一系列奇奇怪怪的问题了。不要自己给自己挖坑，自己坑自己。当然了，有受虐倾向的除外了。呵呵和大家开玩笑，自己开心就好，想怎么样都可以。</p>
+<p>&nbsp;步骤：系统管理-插件管理-安装Email Extension插件</p>
+<p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191010135152939-1655224676.png" alt="" /></p>
+<p>&nbsp;</p>
+<p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191010135308247-71679545.png" alt="" /></p>
+<p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191010135825353-825570541.png" alt="" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;从上图可以看出，这里宏哥已经安装好了2.66的，如果需要更新的可以更新到最新的2.68。由于时间关系，宏哥这里就不做更新操作了。</p>
+<h2>配置发送邮件信息</h2>
+<p>&nbsp;1）系统管理-系统设置-Jenkins Location，这里的管理员地址要和发送人的邮箱地址一样，要不然会有问题。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191010135152939-1655224676.png" alt="" /></p>
+<p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191010140258759-1673753812.png" alt="" /></p>
+<p>&nbsp;</p>
+<p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191010140907074-1941697558.png" alt="" /></p>
+<p>2）系统管理-系统设置-Extended E-mail Notification-高级，根据红框内容填写。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191010135152939-1655224676.png" alt="" /></p>
+<p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191010140258759-1673753812.png" alt="" /></p>
+<p>Extended E-mail Notification和高级的配置如下：</p>
+<p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011103514975-1400621332.png" alt="" /></p>
+<p>1. Override Global Settings：如果不选，该插件将使用默认的E-mail Notification通知选项。反之，您可以通过指定不同于( 默认选项)的设置来进行覆盖。</p>
+<p>2. Default Content Type：指定构建后发送邮件内容的类型，有Text和HTML两种.</p>
+<p>3. Use List-ID Email Header：为所有的邮件设置一个List-ID的邮件信头，这样你就可以在邮件客户端使用过滤。它也能阻止邮件发件人大部分的自动回复(诸如离开办公室、休假等等)。你可以使用你习惯的任何名称或者ID号，但是他们必须符合如下其中一种格式(真实的ID必须要包含在&lt;和&gt;标记里)： &lt;ci-notifications.company.org&gt; Build Notifications &lt;ci-notifications.company.org&gt;
+    &ldquo;Build Notifications&rdquo; &lt;ci-notifications.company.org&gt;</p>
+<p>4. Add \'Precedence: bulk\' Email Header：设置优先级,</p>
+<p>5. Default Recipients：自定义默认电子邮件收件人列表。如果没有被项目配置覆盖,该插件会使用这个列表。您可以在项目配置使用$ DEFAULT_RECIPIENTS参数包括此默认列表，以及添加新的地址在项目级别。添加抄送：cc:电子邮件地址例如,CC:someone@somewhere.com</p>
+<p>6. Reply To List：回复列表, A comma separated list of e-mail addresses to use in the Reply-To header of the email. This value will be available as $DEFAULT_REPLYTO in the project configuration.</p>
+<p>7. Emergency reroute：如果这个字段不为空，所有的电子邮件将被单独发送到该地址（或地址列表）。</p>
+<p>8. Excluded Committers：防止邮件被邮件系统认为是垃圾邮件,邮件列表应该没有扩展的账户名(如:@domain.com),并且使用逗号分隔</p>
+<p>9. Default Subject：自定义邮件通知的默认主题名称。该选项能在邮件的主题字段中替换一些参数，这样你就可以在构建中包含指定的输出信息。</p>
+<p>10. Maximum Attachment Size：邮件最大附件大小。</p>
+<p>11. Default Content：自定义邮件通知的默认内容主体。该选项能在邮件的内容中替换一些参数，这样你就可以在构建中包含指定的输出信息。</p>
+<p>12. Default Pre-send Script：默认发送前执行的脚本（注：grooy脚本，这是我在某篇文章上看到的，不一定准确）。</p>
+<p>13. Enable Debug Mode：启用插件的调试模式。这将增加额外的日志输出，构建日志以及Jenkins的日志。在调试时是有用的，但不能用于生产。</p>
+<p>14. Enable Security：启用时，会禁用发送脚本的能力，直接进入Jenkins实例。如果用户试图访问Jenkins管理对象实例，将抛出一个安全异常。</p>
+<p>15. Content Token Reference：邮件中可以使用的变量，所有的变量都是可选的。</p>
+<p>邮件模板引用别的模板，然后自己改编的：</p>
+<p>default subject&nbsp; &nbsp; &nbsp;&nbsp;[构建通知]：${BUILD_STATUS} - ${PROJECT_NAME} - Build # ${BUILD_NUMBER} !</p>
+<p>1)模板1</p>
+<div class="cnblogs_code"><pre>&lt;!DOCTYPE html&gt;&lt;html lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;&lt;body leftmargin=<span style="color: #800000;">"</span><span style="color: #800000;">8</span><span style="color: #800000;">"</span> marginwidth=<span style="color: #800000;">"</span><span style="color: #800000;">0</span><span style="color: #800000;">"</span> topmargin=<span style="color: #800000;">"</span><span style="color: #800000;">8</span><span style="color: #800000;">"</span> marginheight=<span style="color: #800000;">"</span><span style="color: #800000;">4</span><span style="color: #800000;">"</span> offset=<span style="color: #800000;">"</span><span style="color: #800000;">0</span><span style="color: #800000;">"</span>&gt;    &lt;table width=<span style="color: #800000;">"</span><span style="color: #800000;">95%</span><span style="color: #800000;">"</span> cellpadding=<span style="color: #800000;">"</span><span style="color: #800000;">0</span><span style="color: #800000;">"</span> cellspacing=<span style="color: #800000;">"</span><span style="color: #800000;">0</span><span style="color: #800000;">"</span>  style=<span style="color: #800000;">"</span><span style="color: #800000;">font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif</span><span style="color: #800000;">"</span>&gt;        &lt;tr&gt;<span style="color: #000000;">            本邮件由系统自动发出，无需回复！</span>&lt;br/&gt;<span style="color: #000000;">            各位同事，大家好，以下为${PROJECT_NAME }项目构建信息</span>&lt;/br&gt;            &lt;h1&gt;&lt;center&gt;&lt;font color=<span style="color: #800000;">"</span><span style="color: #800000;">red</span><span style="color: #800000;">"</span>&gt;allure报告在线查看or下载allure-report.zip用firefox离线查看，测试用例见附件&lt;/font&gt;&lt;center&gt;&lt;/h1&gt;        &lt;/tr&gt;        &lt;tr&gt;            &lt;td&gt;&lt;br/&gt;            &lt;b&gt;&lt;font color=<span style="color: #800000;">"</span><span style="color: #800000;">#0B610B</span><span style="color: #800000;">"</span>&gt;项目描述：${JOB_DESCRIPTION}&lt;br&gt;&lt;/font&gt;&lt;/b&gt;            &lt;hr size=<span style="color: #800000;">"</span><span style="color: #800000;">2</span><span style="color: #800000;">"</span> width=<span style="color: #800000;">"</span><span style="color: #800000;">100%</span><span style="color: #800000;">"</span> align=<span style="color: #800000;">"</span><span style="color: #800000;">center</span><span style="color: #800000;">"</span> /&gt;&lt;/td&gt;        &lt;/tr&gt;        &lt;tr&gt;            &lt;td&gt;                &lt;ul&gt;                    &lt;li&gt;项目名称 ： ${PROJECT_NAME}&lt;/li&gt;                    &lt;li&gt;构建编号 ： 第${BUILD_NUMBER}次构建&lt;/li&gt;                    &lt;li&gt;SVN 版本： ${SVN_REVISION}&lt;/li&gt;                    &lt;li&gt;触发原因： ${CAUSE}&lt;/li&gt;                    &lt;li&gt;构建状态： ${BUILD_STATUS}&lt;/li&gt;                    &lt;li&gt;构建日志： &lt;a href=<span style="color: #800000;">"</span><span style="color: #800000;">${BUILD_URL}console</span><span style="color: #800000;">"</span>&gt;${BUILD_URL}console&lt;/a&gt;&lt;/li&gt;                    &lt;li&gt;构建  Url ： &lt;a href=<span style="color: #800000;">"</span><span style="color: #800000;">${BUILD_URL}</span><span style="color: #800000;">"</span>&gt;${BUILD_URL}&lt;/a&gt;&lt;/li&gt;                    &lt;li&gt;工作目录 ： &lt;a href=<span style="color: #800000;">"</span><span style="color: #800000;">${PROJECT_URL}ws</span><span style="color: #800000;">"</span>&gt;${PROJECT_URL}ws&lt;/a&gt;&lt;/li&gt;                    &lt;li&gt;项目  Url ： &lt;a href=<span style="color: #800000;">"</span><span style="color: #800000;">${PROJECT_URL}</span><span style="color: #800000;">"</span>&gt;${PROJECT_URL}&lt;/a&gt;&lt;/li&gt;                    &lt;li&gt;系统allure测试报告：&lt;a HREF=<span style="color: #800000;">"</span><span style="color: #800000;">${PROJECT_URL}${BUILD_NUMBER}/allure</span><span style="color: #800000;">"</span>&gt;${PROJECT_URL}${BUILD_NUMBER}/allure&lt;/a&gt;&lt;li&gt;                &lt;/ul&gt;&lt;/td&gt;        &lt;tr&gt;     &lt;td&gt;            &lt;b&gt;&lt;font color=<span style="color: #800000;">"</span><span style="color: #800000;">#0B610B</span><span style="color: #800000;">"</span>&gt;构建日志 (最后 100行):&lt;/font&gt;&lt;/b&gt;    &lt;hr size=<span style="color: #800000;">"</span><span style="color: #800000;">2</span><span style="color: #800000;">"</span> width=<span style="color: #800000;">"</span><span style="color: #800000;">100%</span><span style="color: #800000;">"</span> align=<span style="color: #800000;">"</span><span style="color: #800000;">center</span><span style="color: #800000;">"</span> /&gt;            &lt;/td&gt;        &lt;/tr&gt;        &lt;tr&gt;          &lt;td&gt;                &lt;textarea cols=<span style="color: #800000;">"</span><span style="color: #800000;">80</span><span style="color: #800000;">"</span> rows=<span style="color: #800000;">"</span><span style="color: #800000;">30</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">readonly</span>=<span style="color: #800000;">"</span><span style="color: #800000;">readonly</span><span style="color: #800000;">"</span> style=<span style="color: #800000;">"</span><span style="color: #800000;">font-family: Courier New</span><span style="color: #800000;">"</span>&gt;${BUILD_LOG, maxLines=<span style="color: #800080;">100</span>}&lt;/textarea&gt;            &lt;/td&gt;        &lt;/tr&gt;<span style="color: #000000;">        ${JELLY_SCRIPT}    </span>&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</pre></div>
+<div
+    class="line number44 index43 alt1">
+    <p>3）配置后发送测试邮件看是否成功发送。宏哥这里发送测试邮件成功如下：</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191010161514089-1406660261.png" alt="" /></p>
+    <p>到邮箱查看如下图：</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011102242442-941951200.png" alt="" /></p>
+    <h2>配置构建后操作</h2>
+    <p>jenkins-项目（需要发送邮件的任务）-配置-构建后操作-Editable Email Notification</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011102517566-893977646.png" alt="" /></p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011102652625-406746030.png" alt="" /></p>
+    <p>点击&ldquo;Advanced Settings&rdquo;</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011103819055-1719566798.png" alt="" /></p>
+    <p>点击&ldquo;Add Trigger&rdquo;，设置邮件的触发条件：</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011103907842-327355764.png" alt="" /></p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011104030882-493445955.png" alt="" /></p>
+    <p>当插件激活后你就能编辑如下字段（只列出常用的字段）：</p>
+    <p>Project Recipient List：这是一个以逗号(或者空格)分隔的收件人邮件的邮箱地址列表。允许您为每封邮件指定单独的列表。Ps：如果你想在默认收件人的基础上添加收件人：$DEFAULT_RECIPIENTS,&lt;新的收件人&gt;</p>
+    <p>Default Subject：允许你配置此项目邮件的主题。</p>
+    <p>Default Content：跟Default Subject的作用一样，但是是替换邮件内容。</p>
+    <p>Attach Build Log：附件构建日志。</p>
+    <p>Compress Build Log before sending：发送前压缩生成日志（zip格式）。</p>
+    <p>Triggers条件：</p>
+    <p>Failure：即时发送构建失败的邮件。如果&rdquo;Still Failing&rdquo;触发器已配置，而上一次构建的状态是&rdquo;Failure&rdquo;，那么&rdquo;Still Failing&rdquo;触发器将发送一封邮件来替代(它)。</p>
+    <p>Unstable：即时发送构建不稳固的邮件。如果&rdquo;Still Unstable&rdquo;触发器已配置，而上一次构建的状态是&rdquo;Unstable&rdquo;，那么&rdquo;Still Unstable&rdquo;触发器将发送一封邮件来替代(它)。</p>
+    <p>Still Failing：如果两次或两次以上连续构建的状态为&rdquo;Failure&rdquo;，发送该邮件。</p>
+    <p><em id="__mceDel"><em id="__mceDel"></em></em>Success：如果构建的状态为&rdquo;Successful&rdquo;发送邮件。如果&rdquo;Fixed&rdquo;已配置，而上次构建的状态为&ldquo;Failure&rdquo;或&ldquo;Unstable&rdquo;，那么&rdquo;Fixed&rdquo;触发器将发送一封邮件来替代(它)。</p>
+    <p>Fixed：当构建状态从&ldquo;Failure&rdquo;或&ldquo;Unstable&rdquo;变为&rdquo;Successful&rdquo;时发送邮件。</p>
+    <p>Still Unstable：如果两次或两次以上连续构建的状态为&rdquo; Unstable &ldquo;，发送该邮件。Before Build：当构建开始时发送邮件。</p>
+    <h2>构建生成报告，并发送邮件</h2>
+    <p>1）点击&ldquo;立即构建&rdquo;生成测试报告，然后发送邮件到相关的负责人邮箱</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011111919070-845804951.png" alt="" /></p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011112117441-990887607.png" alt="" /></p>
+    <h2>小结</h2>
+    <p>1）那个邮件的主题和模板内容可以单独给项目配置，也可以统一在插件处配置。单独项目配置的会覆盖插件出的配置，如果单独项目没有配置，会默认使用插件的配置。</p>
+    <p>2）可能存在发送报错501</p>
+    <p><img src="https://img2018.cnblogs.com/blog/723253/201908/723253-20190819113301130-2085804793.png" alt="" width="885" height="331" /></p>
+    <p>501解决方法：</p>
+    <p>&nbsp;<img src="https://img2018.cnblogs.com/blog/723253/201908/723253-20190819113450813-260200940.png" alt="" width="907" height="161" /></p>
+    <p>3）可能存在发送报错535</p>
+    <p><img src="https://img2018.cnblogs.com/blog/723253/201908/723253-20190819114258893-1881402791.png" alt="" width="925" height="177" /></p>
+    <p>535解决方法：</p>
+    <p>检查授权码是否正确</p>
+    <p><img src="https://img2018.cnblogs.com/blog/723253/201908/723253-20190819113823369-782052605.png" alt="" width="1091" height="174" /></p>
+    <p>4）QQ邮箱注意事项</p>
+    <p>QQ邮箱开启IMAP/SMTP服务：设置--账户</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1430396/201904/1430396-20190428151826408-1455332883.png" alt="" /></p>
+    <p><strong>&nbsp;QQ邮箱服务器端口号</strong></p>
+    <p><img src="https://img2018.cnblogs.com/blog/1430396/201904/1430396-20190428152751898-115138792.png" alt="" /></p>
+    <p>5）如果测试邮件发送成功，立即构建后，邮件却发送失败，将这个勾选上，在构建时查看控制台的日志，进行错误排查</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011113418166-809734252.png" alt="" /></p>
+    <p>&nbsp;</p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201910/1232840-20191011113547968-1090477569.png" alt="" /></p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p><span style="font-size: 18px;"><strong><strong>您的肯定就是我进步的动力。</strong>如果你感觉还不错，就请鼓励一下吧！记得点波&nbsp;<span style="font-size: 18pt; color: #ff0000;">推荐</span>&nbsp;哦！！！（点击右边的小球即可！(^__^)&nbsp;嘻嘻&hellip;&hellip;）</strong>
+        </span>
+    </p>
+    <p><img src="https://img2018.cnblogs.com/blog/1232840/201908/1232840-20190816135641371-1314831001.gif" alt="" /></p>
+    </div>"'

@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('../assets/font/PingFang Regular.ttf'), url('../assets/font/PingFang Bold.ttf') format('bold');
+}
+
+html {
+    /* font-size: 15px; */
+}
+
+
+/* .common-article-content {
+    font-size: 1.2em;
+    line-height: 2;
+} */
+
+img {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
