@@ -1,8 +1,6 @@
-# Docs for QuickRead
+# QuickRead
 
 **Author:** Zheng Chao
-
-**Student Number:** 1751747
 
 **Tutor:** Liu Yan
 
